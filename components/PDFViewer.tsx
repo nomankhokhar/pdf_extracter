@@ -27,8 +27,11 @@ import {
 
 // Import styles
 import "@react-pdf-viewer/highlight/lib/styles/index.css";
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
+// Set the PDF worker (browser only)
+if (typeof window !== "undefined") {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+}
 interface ExtractedText {
   text: string;
   bbox: [number, number, number, number]; // [x, y, width, height]
