@@ -11,7 +11,7 @@ const nextConfig = {
     { isServer }: { isServer: boolean }
   ) => {
     if (!isServer) {
-      config.resolve.alias.canvas = true;
+      config.resolve.alias.canvas = false;
     }
     return config;
   },
