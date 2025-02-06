@@ -1,20 +1,16 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  webpack: (
-    config: {
-      resolve: {
-        alias: {
-          canvas: boolean;
-        };
+module.exports = {
+  target: "serverless",
+  future: { webpack5: true },
+  webpack: (config: {
+    resolve: {
+      alias: {
+        canvas: boolean;
+        encoding: boolean;
       };
-    },
-    { isServer }: { isServer: boolean }
-  ) => {
-    if (!isServer) {
-      config.resolve.alias.canvas = false;
-    }
+    };
+  }) => {
+    config.resolve.alias.canvas = false;
+    config.resolve.alias.encoding = false;
     return config;
   },
 };
-
-module.exports = nextConfig;
