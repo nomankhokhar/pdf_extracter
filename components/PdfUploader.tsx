@@ -5,7 +5,7 @@ import PDFViewer from "./PDFViewer";
 
 const PdfUploader = () => {
   const [pdfUrl, setPdfUrl] = useState<string>(
-    "https://youlearn-content-uploads.s3.amazonaws.com/content/b5671201db3042a08a93deaab2e3b8e7.pdf"
+    "https://api31.ilovepdf.com/v1/download/Alp88zq9c5f9chqxhpvd94bdn130d8zyzvf12pj9An36bxg3qxh9z25j5kf6kjhlmd1Ajtbzlgwtmsnn8qAckncsz5xqz8t0v6zhAsz6sdfcy4y47sgxwhbspjt12m8sAhA7hb0zjxx9rldkb0m9t7hlfmpf8nl220ms9357bdkxdpt4tdt12"
   );
   const [inputUrl, setInputUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -77,7 +77,7 @@ const PdfUploader = () => {
       ) : (
         <div>
           <button
-            className="fixed bottom-6 right-6 bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition"
+            className="fixed top-6 right-6 bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition z-50"
             onClick={uploadAnotherPdf}
           >
             Upload Another PDF

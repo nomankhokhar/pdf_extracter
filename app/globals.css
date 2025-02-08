@@ -6,3 +6,28 @@
   --background: #f0f0f0; /* Set your desired background color */
   --foreground: #333333; /* Set your desired foreground color */
 }
+
+.page-container {
+  position: relative;
+  width: 595px;
+  height: 842px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: white;
+}
+.word {
+  position: absolute;
+  white-space: nowrap;
+  font-family: "Times New Roman", serif;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+.highlighted {
+  background-color: #ffeb3b80;
+}
+.selecting {
+  background-color: #ffeb3b80;
+}
