@@ -32,7 +32,6 @@ import OCRView from "./OCRView";
 import { OCRData } from "@/types/OCR";
 import { PDFData } from "@/types/PDF";
 
-// Set the PDF worker (browser only)
 if (typeof window !== "undefined") {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 }
@@ -178,22 +177,28 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl }) => {
         {/* PDF Viewer with Bounding Boxes */}
         <div className="bg-white rounded-lg shadow-md h-[500px] overflow-hidden relative">
           {blobUrl ? (
-            <Worker
-              workerUrl={`https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`}
-            >
-              <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
-              <Viewer
-                theme="dark"
-                plugins={[toolbarPluginInstance, highlightPluginInstance]}
-                fileUrl={blobUrl}
-                defaultScale={SpecialZoomLevel.PageFit}
-              />
-            </Worker>
+            <div>
+              <h1 className="text-3xl font-bold mb-6">Link PDF View</h1>
+              <Worker
+                workerUrl={`https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`}
+              >
+                <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
+                <Viewer
+                  theme="dark"
+                  plugins={[toolbarPluginInstance, highlightPluginInstance]}
+                  fileUrl={blobUrl}
+                  defaultScale={SpecialZoomLevel.PageFit}
+                />
+              </Worker>
+            </div>
           ) : (
             Loader()
           )}
         </div>
         <div className="bg-white rounded-lg shadow-md h-[500px] overflow-auto p-2 flex flex-col">
+          <h1 className="text-3xl font-bold mb-6">
+            {ocrData ? "OCR Text" : "PDF Text"}
+          </h1>
           {ocrData && <OCRView ocrData={ocrData} />}
           {pdfData && <PdfView pdfData={pdfData} />}
           {isLoading && ExtractingText()}
