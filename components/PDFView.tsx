@@ -1,21 +1,8 @@
+import { PDFData } from "@/types/PDF";
 import React, { useState, useEffect, useRef } from "react";
 
-type WordData = {
-  text: string;
-  bbox: [number, number, number, number];
-};
-
-type PageData = {
-  page: number;
-  words: WordData[];
-};
-
-type PdfData = {
-  text: PageData[];
-};
-
 type PdfViewProps = {
-  pdfData: PdfData;
+  pdfData: PDFData;
 };
 
 const PdfView: React.FC<PdfViewProps> = ({ pdfData }) => {

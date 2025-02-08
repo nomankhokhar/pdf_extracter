@@ -1,21 +1,8 @@
+import { OCRData } from "@/types/OCR";
 import React, { useState, useEffect } from "react";
 
-interface WordData {
-  text: string;
-  bbox: number[][];
-}
-
-interface PageData {
-  page: number;
-  content: WordData[];
-}
-
-interface PDFData {
-  text: PageData[];
-}
-
 type OCRViewProps = {
-  ocrData: PDFData;
+  ocrData: OCRData;
 };
 
 const OCRView: React.FC<OCRViewProps> = ({ ocrData }) => {

@@ -4,9 +4,7 @@ import { toast } from "react-hot-toast";
 import PDFViewer from "./PDFViewer";
 
 const PdfUploader = () => {
-  const [pdfUrl, setPdfUrl] = useState<string>(
-    "https://api31.ilovepdf.com/v1/download/Alp88zq9c5f9chqxhpvd94bdn130d8zyzvf12pj9An36bxg3qxh9z25j5kf6kjhlmd1Ajtbzlgwtmsnn8qAckncsz5xqz8t0v6zhAsz6sdfcy4y47sgxwhbspjt12m8sAhA7hb0zjxx9rldkb0m9t7hlfmpf8nl220ms9357bdkxdpt4tdt12"
-  );
+  const [pdfUrl, setPdfUrl] = useState<string>("");
   const [inputUrl, setInputUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,14 +14,33 @@ const PdfUploader = () => {
       if (!inputUrl.trim()) return;
 
       setIsLoading(true);
-      setError(null);
 
-      setError("Invalid PDF URL.");
-      toast.error("Invalid PDF URL.");
+      try {
+        const urlPattern =
+          /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+        if (!urlPattern.test(inputUrl)) {
+          throw new Error("Invalid URL format.");
+        }
 
-      toast.success("PDF Loaded Successfully!");
-      setPdfUrl(inputUrl);
-      setIsLoading(false);
+        // Check if the URL ends with .pdf or has the correct MIME type
+        const response = await fetch(inputUrl, { method: "HEAD" });
+        if (!response.ok) {
+          toast.error("Failed to load the pdf");
+          return;
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/pdf")) {
+          toast.error("The URL does not point to a PDF file.");
+          return;
+        }
+
+        setPdfUrl(inputUrl);
+      } catch {
+        toast.error("Failed to load the pdf");
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     // Only validate if inputUrl changes
@@ -31,7 +48,6 @@ const PdfUploader = () => {
       validateAndLoadPdf();
     }
   }, [inputUrl]);
-
   const uploadAnotherPdf = () => {
     setPdfUrl("");
     setInputUrl("");
