@@ -7,9 +7,9 @@ Right show extracted text.
 ![Project Screenshot](./images/OCRView.PNG)
 ![Project Screenshot](./images/PDFView.PNG)
 
-1 -> NextJS 15
-2 -> Tailwind
-3 -> TypeScript
+- NextJS 15
+- Tailwind
+- TypeScript
 
 ## Authors
 
