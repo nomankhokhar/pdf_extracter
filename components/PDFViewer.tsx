@@ -175,7 +175,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl }) => {
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* PDF Viewer with Bounding Boxes */}
-        <div className="bg-white rounded-lg shadow-md h-[500px] overflow-hidden relative">
+        <div className="bg-white rounded-lg shadow-md h-[500px] overflow-auto relative">
           {blobUrl ? (
             <div>
               <h1 className="text-3xl font-bold mb-6">Link PDF View</h1>
