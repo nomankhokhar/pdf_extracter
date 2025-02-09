@@ -93,9 +93,12 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl }) => {
       try {
         setIsLoading(true);
         toast.loading("Processing PDF...");
-        const response = await axios.post("http://localhost:8000/extract", {
-          pdf_url: pdfUrl,
-        });
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/extract`,
+          {
+            pdf_url: pdfUrl,
+          }
+        );
 
         if (response?.data) {
           if (response?.data?.text[0]?.content) {
