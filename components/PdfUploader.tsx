@@ -23,7 +23,10 @@ const PdfUploader = () => {
         }
 
         // Check if the URL ends with .pdf or has the correct MIME type
-        const response = await fetch(inputUrl, { method: "HEAD" });
+        const response = await fetch(inputUrl, {
+          method: "GET",
+          redirect: "follow",
+        });
         if (!response.ok) {
           toast.error("Failed to load the pdf");
           return;
